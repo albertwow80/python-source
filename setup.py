@@ -3,7 +3,7 @@ import os
 
 setup(
     name = 'source',
-    version = '0.0.0',
+    version = '0.0.1',
     packages=[
         'source'
     ],
