@@ -1,4 +1,4 @@
-from source.client import Client as _Client
+from segment_source.client import Client as _Client
 
 _client = None
 
