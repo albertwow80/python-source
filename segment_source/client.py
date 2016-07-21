@@ -68,8 +68,8 @@ def store_context(payload):
 
 def report_error(message, collection=None):
     request = service.ReportErrorRequest(message=message, collection=collection)
-    client.ReportError(request)
+    client.ReportError(request, _TIMEOUT)
 
 def report_warning(message, collection=None):
     request = service.ReportWarningRequest(message=message, collection=collection)
-    client.ReportWarning(request)
+    client.ReportWarning(request, _TIMEOUT)
