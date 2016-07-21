@@ -1,0 +1,87 @@
+syntax = "proto3";
+
+package domain;
+
+service Source {
+    rpc Set (SetRequest) returns (StatusResponse) {}
+    rpc Track (TrackRequest) returns (StatusResponse) {}
+    rpc Identify (IdentifyRequest) returns (StatusResponse) {}
+    rpc Group (GroupRequest) returns (StatusResponse) {}
+    rpc KeepAlive (KeepAliveRequest) returns (StatusResponse) {}
+    rpc GetContext (GetContextRequest) returns (GetContextResponse) {}
+    rpc StoreContext (StoreContextRequest) returns (StoreContextResponse) {}
+    rpc ReportError (ReportErrorRequest) returns (StatusResponse) {}
+    rpc ReportWarning (ReportWarningRequest) returns (StatusResponse) {}
+}
+
+// Generic
+message StatusResponse {
+    bool success = 1;
+}
+
+// Track
+message TrackRequest {
+    bytes context = 1;
+    bytes integrations = 2;
+    bytes properties = 3;
+    string anonymousId = 4;
+    string userId = 5;
+    string event = 6;
+}
+
+// Identify
+message IdentifyRequest {
+    bytes context = 1;
+    bytes integrations = 2;
+    bytes traits = 3;
+    string anonymousId = 4;
+    string userId = 5;
+}
+
+// Group
+message GroupRequest {
+    bytes context = 1;
+    bytes integrations = 2;
+    bytes traits = 3;
+    string anonymousId = 4;
+    string userId = 5;
+    string groupId = 6;
+}
+
+// Set
+message SetRequest {
+    string collection = 1;
+    string id = 2;
+    bytes properties = 3;
+}
+
+// KeepAlive
+message KeepAliveRequest {}
+
+// GetContext
+message GetContextRequest {}
+
+message GetContextResponse {
+    string path = 1;
+}
+
+// StoreContext
+message StoreContextRequest {
+    bytes payload = 1;
+}
+
+message StoreContextResponse {
+    string path = 1;
+}
+
+// ReportError
+message ReportErrorRequest {
+    string collection = 1;
+    string message = 3;
+}
+
+// ReportWarning
+message ReportWarningRequest {
+    string collection = 1;
+    string message = 3;
+}

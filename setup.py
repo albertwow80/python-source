@@ -4,14 +4,13 @@ import os
 setup(
     name='segment_source',
     packages=['segment_source'],
-    version='0.0.5',
+    version='0.1.0',
     description='Python source client',
     author='Segment',
     author_email='friends@segment.com',
     url='https://github.com/segmentio/python-source',
     install_requires=[
-        'jsonrpc-requests==0.2',
         'simplejson==3.8.2',
-        'websocket-client==0.37.0'
+        'grpcio==0.15.0'
     ]
 )
