@@ -27,20 +27,26 @@ def set(collection, id_, properties):
 
     client.Set(request, _TIMEOUT)
 
+
 def track(context=None, integrations=None, properties=None, anonymous_id=None,
           user_id=None, event=None):
     pass
+
 
 def identify(context=None, integrations=None, traits=None, anonymous_id=None,
              user_id=None):
     pass
 
+
 def group(context=None, integrations=None, traits=None, anonymous_id=None,
           user_id=None, event=None):
     pass
 
+
 def keep_alive():
-    pass
+    request = service.KeepAliveRequest()
+    client.KeepAlive(request, _TIMEOUT)
+
 
 def get_context():
     request = service.GetContextRequest()
@@ -57,6 +63,7 @@ def get_context():
 
     return context
 
+
 def store_context(payload):
     _payload = _byteify(payload)
     request = service.StoreContextRequest(payload=_payload)
@@ -66,9 +73,11 @@ def store_context(payload):
     except Exception as err:
         print(err, "Source.StoreContext failed")
 
+
 def report_error(message, collection=None):
     request = service.ReportErrorRequest(message=message, collection=collection)
     client.ReportError(request, _TIMEOUT)
+
 
 def report_warning(message, collection=None):
     request = service.ReportWarningRequest(message=message, collection=collection)
