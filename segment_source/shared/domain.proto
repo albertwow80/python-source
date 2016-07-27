@@ -3,21 +3,33 @@ syntax = "proto3";
 package domain;
 
 service Source {
+    // API Proxy
     rpc Set (SetRequest) returns (StatusResponse) {}
     rpc Track (TrackRequest) returns (StatusResponse) {}
     rpc Identify (IdentifyRequest) returns (StatusResponse) {}
     rpc Group (GroupRequest) returns (StatusResponse) {}
-    rpc KeepAlive (KeepAliveRequest) returns (StatusResponse) {}
-    rpc GetContext (GetContextRequest) returns (GetContextResponse) {}
+
+    // Context
+    rpc GetContext (Empty) returns (GetContextResponse) {}
     rpc StoreContext (StoreContextRequest) returns (StoreContextResponse) {}
+
+    // Reports
     rpc ReportError (ReportErrorRequest) returns (StatusResponse) {}
     rpc ReportWarning (ReportWarningRequest) returns (StatusResponse) {}
+
+    // Stats
+    rpc StatsIncrement (StatsRequest) returns (StatusResponse) {}
+    rpc StatsHistogram (StatsRequest) returns (StatusResponse) {}
+    rpc StatsGauge (StatsRequest) returns (StatusResponse) {}
+
+    // Misc.
+    rpc KeepAlive (Empty) returns (StatusResponse) {}
 }
 
-// Generic
-message StatusResponse {
-    bool success = 1;
-}
+
+//
+// API Proxy
+//
 
 // Track
 message TrackRequest {
@@ -55,12 +67,12 @@ message SetRequest {
     bytes properties = 3;
 }
 
-// KeepAlive
-message KeepAliveRequest {}
+
+//
+// Context
+//
 
 // GetContext
-message GetContextRequest {}
-
 message GetContextResponse {
     string path = 1;
 }
@@ -74,6 +86,11 @@ message StoreContextResponse {
     string path = 1;
 }
 
+
+//
+// Reports
+//
+
 // ReportError
 message ReportErrorRequest {
     string collection = 1;
@@ -85,3 +102,26 @@ message ReportWarningRequest {
     string collection = 1;
     string message = 3;
 }
+
+
+//
+// Stats
+//
+
+// StatsIncrement, StatsHistogram, StatsGauge
+message StatsRequest {
+    string name = 1;
+    int64 value = 2;
+    repeated string tags = 3;
+}
+
+
+//
+// Misc.
+//
+
+message StatusResponse {
+    bool success = 1;
+}
+
+message Empty {}
