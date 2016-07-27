@@ -44,15 +44,12 @@ def group(context=None, integrations=None, traits=None, anonymous_id=None,
 
 
 def keep_alive():
-    request = service.KeepAliveRequest()
-    client.KeepAlive(request, _TIMEOUT)
+    client.KeepAlive(service.Empty(), _TIMEOUT)
 
 
 def get_context():
-    request = service.GetContextRequest()
-
     try:
-        response = client.GetContext(request, _TIMEOUT)
+        response = client.GetContext(service.Empty(), _TIMEOUT)
     except:
         # Hack because GetContext is kinda broken and returns errors if no context
         # is found in previous runs (last 20 runs failed || first run)
@@ -82,3 +79,18 @@ def report_error(message, collection=None):
 def report_warning(message, collection=None):
     request = service.ReportWarningRequest(message=message, collection=collection)
     client.ReportWarning(request, _TIMEOUT)
+
+
+def stats_increment(name, value=1, tags=None):
+    request = service.StatsRequest(name=name, value=value, tags=tags)
+    client.stats_increment(request, _TIMEOUT)
+
+
+def stats_histogram(name, value, tags=None):
+    request = service.StatsRequest(name=name, value=value, tags=tags)
+    client.stats_histogram(request, _TIMEOUT)
+
+
+def stats_gauge(name, value, tags=None):
+    request = service.StatsRequest(name=name, value=value, tags=tags)
+    client.stats_gauge(request, _TIMEOUT)
