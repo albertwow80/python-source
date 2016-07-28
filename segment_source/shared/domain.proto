@@ -74,7 +74,7 @@ message SetRequest {
 
 // GetContext
 message GetContextResponse {
-    string path = 1;
+  bytes data = 1;
 }
 
 // StoreContext
