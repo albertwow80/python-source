@@ -55,9 +55,7 @@ def get_context():
         # is found in previous runs (last 20 runs failed || first run)
         return {}
 
-    contents = open(response.path).read()
-    context = json.loads(contents)
-
+    context = json.loads(response.data)
     return context
 
 
