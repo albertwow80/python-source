@@ -4,7 +4,7 @@ import os
 setup(
     name='segment_source',
     packages=['segment_source'],
-    version='0.4.0',
+    version='0.5.0',
     description='Python source client',
     author='Segment',
     author_email='friends@segment.com',
