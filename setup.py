@@ -11,6 +11,6 @@ setup(
     url='https://github.com/segmentio/python-source',
     install_requires=[
         'simplejson==3.8.2',
-        'grpcio==0.15.0'
+        'grpcio==1.0.0rc1'
     ]
 )
